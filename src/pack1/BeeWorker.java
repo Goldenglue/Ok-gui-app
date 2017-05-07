@@ -21,14 +21,14 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
     }
 
 
-
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, (int)currentLocation.getX(), (int)currentLocation.getY(), null);
+        g.drawImage(img, (int) currentLocation.getX(), (int) currentLocation.getY(), null);
     }
 
     BeeWorker(int lifeTime, long hashCode) {
         super(lifeTime, hashCode);
+        beeWorkerBaseAI = new BeeWorkerBaseAI(this);
 
     }
 

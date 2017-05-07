@@ -10,22 +10,23 @@ import java.util.Map;
  */
 public class Habitat extends JPanel {
 
-    public Timer maleBeeUpdateTimer;
-    public Timer beeWorkerUpdateTimer;
-    public Timer checkForDeadBees;
-    public int maleBeeCounter;
-    public int beeWorkerCounter;
-    public int hivePopulation;
-    public double probability;
+    Timer maleBeeUpdateTimer;
+    Timer beeWorkerUpdateTimer;
+    Timer checkForDeadBees;
+    int maleBeeCounter;
+    int beeWorkerCounter;
+    int hivePopulation;
+    double probability;
     private long simulationStartTime;
-    public long simulationTime;
+    long simulationTime;
     private AbstractFactory factory;
     private boolean doIShowTime;
-    public float maleBeeUpdatePeriod;
-    public float beeWorkerUpdatePeriod;
+    float maleBeeUpdatePeriod;
+    float beeWorkerUpdatePeriod;
     int lifeTimeOfMaleBee = 5;
     int lifeTimeOfBeeWorker = 5;
     private Thread paintThread;
+
     Runnable paint = () -> {
       while (true) {
           repaint();

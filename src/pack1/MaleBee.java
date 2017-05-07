@@ -11,7 +11,6 @@ import java.io.IOException;
  */
 public class MaleBee extends AbstractBee implements IBehaviour {
     private static Image img;
-    private MaleBeeBaseAI maleBeeAI;
     private String ident = String.valueOf(this.getClass());
 
     static {
@@ -32,7 +31,7 @@ public class MaleBee extends AbstractBee implements IBehaviour {
 
     MaleBee(int lifeTime, long hashCode) {
         super(lifeTime, hashCode);
-        maleBeeAI = new MaleBeeBaseAI(this);
+        maleBeeBaseAI = new MaleBeeBaseAI(this);
 
 
     }
