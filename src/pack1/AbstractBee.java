@@ -6,14 +6,16 @@ import java.awt.*;
  * Created by IvanOP on 02.04.2017.
  */
 public abstract class AbstractBee {
-    int xCoordinate;
-    int yCoordinate;
+    Point initialLocation;
+    Point currentLocation;
+    MaleBeeBaseAI thisAI;
+    int speed = 25;
     int lifeTime;
     private long hashCode;
 
     AbstractBee(int lifeTime, long hashCode) {
-        this.xCoordinate = (int) (Math.random() * 500);
-        this.yCoordinate = 70 + (int) (Math.random() * 500);
+        this.initialLocation =  new Point((int) (Math.random() * 600),70 + (int) (Math.random() * 700));
+        this.currentLocation =  new Point(initialLocation);
         this.lifeTime = lifeTime;
         this.hashCode = hashCode;
     }

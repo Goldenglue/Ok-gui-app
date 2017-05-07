@@ -120,7 +120,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         readTextFieldsOfPeriod.addActionListener(actionEvent -> {
             String value = textFieldOfMaleBeePeriod.getText();
             value = value.replaceAll("[^0-9.]", "");
-            habitat.maleBeeUpdatePeriod = Float.valueOf(value);
+            habitat.maleBeeUpdatePeriod = Float.valueOf(value) * 1000;
             value = textFieldOfBeeWorkerPeriod.getText();
             value = value.replaceAll("[^0-9.]", "");
             habitat.beeWorkerUpdatePeriod = Float.valueOf(value) * 1000;

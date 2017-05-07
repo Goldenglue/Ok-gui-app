@@ -25,6 +25,17 @@ public class Habitat extends JPanel {
     public float beeWorkerUpdatePeriod;
     int lifeTimeOfMaleBee = 5;
     int lifeTimeOfBeeWorker = 5;
+    private Thread paintThread;
+    Runnable paint = () -> {
+      while (true) {
+          repaint();
+          try {
+              Thread.sleep(100);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+      }
+    };
 
 
     public Habitat() {
@@ -37,6 +48,8 @@ public class Habitat extends JPanel {
         this.maleBeeUpdatePeriod = 1300;
         this.beeWorkerUpdatePeriod = 1000;
         Updater();
+        paintThread = new Thread(paint);
+        paintThread.start();
 
     }
 
@@ -45,7 +58,7 @@ public class Habitat extends JPanel {
         return new Dimension(700, 800);
     }
 
-    public void paintComponent(Graphics g) {
+    public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (doIShowTime) {
             g.drawString("Simulation time: " + String.valueOf(simulationTime), 50, 50);
@@ -66,7 +79,6 @@ public class Habitat extends JPanel {
                 CollectionsForObjects.getInstance().getLongLongTreeMap().put(uniqueIdentity, simulationTime);
                 maleBeeCounter++;
                 hivePopulation++;
-                repaint();
             }
         });
 
@@ -78,7 +90,6 @@ public class Habitat extends JPanel {
             CollectionsForObjects.getInstance().getLongLongTreeMap().put(uniqueIdentity, simulationTime);
             beeWorkerCounter++;
             hivePopulation++;
-            repaint();
         });
 
         checkForDeadBees = new Timer(1000, actionEvent -> {
@@ -92,7 +103,6 @@ public class Habitat extends JPanel {
                         CollectionsForObjects.getInstance().getAbstractBeeHashSet().remove(temp.getKey());
                         abstractBeeIterator.remove();
                         treeMapIterator.remove();
-
                         if (treeMapIterator.hasNext()) {
                             temp = treeMapIterator.next();
                         } else {
@@ -102,7 +112,6 @@ public class Habitat extends JPanel {
                     }
                 }
             }
-            repaint();
 
         });
 

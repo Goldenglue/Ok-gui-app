@@ -10,6 +10,7 @@ import java.io.IOException;
  */
 public class BeeWorker extends AbstractBee implements IBehaviour {
     private static Image img;
+    private String ident = String.valueOf(this.getClass());
 
     static {
         try {
@@ -19,11 +20,11 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
         }
     }
 
-    private String ident = String.valueOf(this.getClass());
+
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, xCoordinate, yCoordinate, null);
+        g.drawImage(img, (int)currentLocation.getX(), (int)currentLocation.getY(), null);
     }
 
     BeeWorker(int lifeTime, long hashCode) {
