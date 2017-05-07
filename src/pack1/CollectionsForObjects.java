@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class CollectionsForObjects {
     private static ArrayList<AbstractBee> abstractBeeArrayList = new ArrayList<>();
     private static HashSet<Long> abstractBeeHashSet = new HashSet<>(100);
-    private static TreeMap<Long,Long> longLongTreeMap = new TreeMap<>();
+    private static TreeMap<Long, Long> longLongTreeMap = new TreeMap<>();
     private static volatile CollectionsForObjects instance;
 
     public static CollectionsForObjects getInstance() {
@@ -30,15 +30,15 @@ public class CollectionsForObjects {
         abstractBeeArrayList.add(tempObj);
     }
 
-    public ArrayList<AbstractBee> getAbstractBeeArrayList() {
+    ArrayList<AbstractBee> getAbstractBeeArrayList() {
         return abstractBeeArrayList;
     }
 
-    public TreeMap<Long,Long> getLongLongTreeMap() {
+    TreeMap<Long, Long> getLongLongTreeMap() {
         return longLongTreeMap;
     }
 
-    public HashSet<Long> getAbstractBeeHashSet() {
+    HashSet<Long> getAbstractBeeHashSet() {
         return abstractBeeHashSet;
     }
 

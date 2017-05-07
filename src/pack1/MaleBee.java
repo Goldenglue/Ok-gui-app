@@ -25,14 +25,12 @@ public class MaleBee extends AbstractBee implements IBehaviour {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, xCoordinate, yCoordinate,null);
+        g.drawImage(img, xCoordinate, yCoordinate, null);
     }
 
 
-    public MaleBee(){
-        this.xCoordinate = (int)(Math.random()*500);
-        this.yCoordinate = (int)(Math.random()*500);
-        this.lifeTime = 3;
+    MaleBee(int lifeTime, long hashCode) {
+        super(lifeTime, hashCode);
     }
 
 }

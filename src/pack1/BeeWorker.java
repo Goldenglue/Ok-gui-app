@@ -18,17 +18,16 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
             e.printStackTrace();
         }
     }
+
     private String ident = String.valueOf(this.getClass());
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, xCoordinate, yCoordinate,null);
+        g.drawImage(img, xCoordinate, yCoordinate, null);
     }
 
-    public BeeWorker() {
-        this.xCoordinate = (int)(Math.random()*500);
-        this.yCoordinate = (int)(Math.random()*500);
-        this.lifeTime = 5;
+    BeeWorker(int lifeTime, long hashCode) {
+        super(lifeTime, hashCode);
 
     }
 

@@ -8,8 +8,15 @@ import java.awt.*;
 public abstract class AbstractBee {
     int xCoordinate;
     int yCoordinate;
-    long lifeTime;
+    int lifeTime;
+    private long hashCode;
 
+    AbstractBee(int lifeTime, long hashCode) {
+        this.xCoordinate = (int) (Math.random() * 500);
+        this.yCoordinate = 70 + (int) (Math.random() * 500);
+        this.lifeTime = lifeTime;
+        this.hashCode = hashCode;
+    }
 
     public abstract void paintComponent(Graphics g);
 }

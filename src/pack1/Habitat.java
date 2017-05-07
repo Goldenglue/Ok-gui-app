@@ -1,9 +1,9 @@
 package pack1;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by IvanOP on 02.04.2017.
@@ -23,6 +23,8 @@ public class Habitat extends JPanel {
     private boolean doIShowTime;
     public float maleBeeUpdatePeriod;
     public float beeWorkerUpdatePeriod;
+    int lifeTimeOfMaleBee = 5;
+    int lifeTimeOfBeeWorker = 5;
 
 
     public Habitat() {
@@ -40,7 +42,7 @@ public class Habitat extends JPanel {
 
 
     public Dimension getPreferredSize() {
-        return new Dimension(700, 500);
+        return new Dimension(700, 800);
     }
 
     public void paintComponent(Graphics g) {
@@ -57,8 +59,8 @@ public class Habitat extends JPanel {
     private void Updater() {
         maleBeeUpdateTimer = new Timer(((int) maleBeeUpdatePeriod), actionEvent -> {
             if (((float) maleBeeCounter / (float) hivePopulation) < probability) {
-                CollectionsForObjects.getInstance().addObject(factory.produceMaleBee());
                 long uniqueIdentity = (long) (Math.random() * Long.MAX_VALUE);
+                CollectionsForObjects.getInstance().addObject(factory.produceMaleBee(lifeTimeOfMaleBee, uniqueIdentity));
                 CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(uniqueIdentity);
                 simulationTime = (System.currentTimeMillis() - simulationStartTime) / 1000;
                 CollectionsForObjects.getInstance().getLongLongTreeMap().put(uniqueIdentity, simulationTime);
@@ -69,8 +71,8 @@ public class Habitat extends JPanel {
         });
 
         beeWorkerUpdateTimer = new Timer(((int) beeWorkerUpdatePeriod), actionEvent -> {
-            CollectionsForObjects.getInstance().addObject(factory.produceBeeWorker());
             long uniqueIdentity = (long) (Math.random() * Long.MAX_VALUE);
+            CollectionsForObjects.getInstance().addObject(factory.produceBeeWorker(lifeTimeOfBeeWorker, uniqueIdentity));
             CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(uniqueIdentity);
             simulationTime = (System.currentTimeMillis() - simulationStartTime) / 1000;
             CollectionsForObjects.getInstance().getLongLongTreeMap().put(uniqueIdentity, simulationTime);
@@ -90,6 +92,7 @@ public class Habitat extends JPanel {
                         CollectionsForObjects.getInstance().getAbstractBeeHashSet().remove(temp.getKey());
                         abstractBeeIterator.remove();
                         treeMapIterator.remove();
+
                         if (treeMapIterator.hasNext()) {
                             temp = treeMapIterator.next();
                         } else {
