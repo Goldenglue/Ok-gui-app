@@ -2,6 +2,7 @@ package pack1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -26,16 +27,68 @@ public class Habitat extends JPanel {
     int lifeTimeOfMaleBee = 5;
     int lifeTimeOfBeeWorker = 5;
     private Thread paintThread;
+    PipedWriter pipedOutputStreamToConsole;
+    PipedReader pipedInputStreamFromConsole;
+    private int currentAliveMaleBeeNumber;
+    private int currentAliveBeeWorkerNumber;
+    private boolean isReturningMaleBee =  false;
+    private boolean isReturningBeeWorker =  false;
+    private char[] buffer =  new char[6];
+    Thread pipedOutputStreamToConsoleThread = new Thread(() -> {
+        while (true) {
+            try {
+                if (isReturningMaleBee) {
+                    pipedOutputStreamToConsole.write(currentAliveMaleBeeNumber);
+                    currentAliveMaleBeeNumber = 0;
+                    isReturningMaleBee = false;
+                } else if (isReturningBeeWorker) {
+                    pipedOutputStreamToConsole.write(currentAliveBeeWorkerNumber);
+                    currentAliveBeeWorkerNumber = 0;
+                    isReturningBeeWorker = false;
+                }
+                Thread.sleep(100);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    Thread pipedInputStreamFromConsoleThread =  new Thread(() -> {
+       while (true) {
+           try {
+               pipedInputStreamFromConsole.read(buffer,0,6);
+               String string = String.valueOf(buffer);
+               if (string.equals("gcambn")) {
+                   CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                       if (abstractBee.getIdentification().equals("MaleBee")) {
+                           currentAliveMaleBeeNumber++;
+                       }
+                   });
+                   isReturningMaleBee =  true;
+               } else if (string.equals("gcabwn")) {
+                   CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                       if (abstractBee.getIdentification().equals("BeeWorker")) {
+                           currentAliveBeeWorkerNumber++;
+                       }
+                   });
+                   isReturningBeeWorker = true;
+               }
+               Thread.sleep(100);
+           } catch (IOException | InterruptedException e) {
+               e.printStackTrace();
+           }
+       }
+    });
+
 
     Runnable paint = () -> {
-      while (true) {
-          repaint();
-          try {
-              Thread.sleep(100);
-          } catch (InterruptedException e) {
-              e.printStackTrace();
-          }
-      }
+        while (true) {
+            repaint();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     };
 
 
@@ -51,7 +104,6 @@ public class Habitat extends JPanel {
         Updater();
         paintThread = new Thread(paint);
         paintThread.start();
-
     }
 
 
@@ -117,6 +169,13 @@ public class Habitat extends JPanel {
         });
 
 
+    }
+
+    public void initializePipedStreams() throws IOException {
+        pipedOutputStreamToConsole = new PipedWriter();
+        pipedInputStreamFromConsole = new PipedReader();
+        pipedOutputStreamToConsoleThread.start();
+        pipedInputStreamFromConsoleThread.start();
     }
 
     public void startSimulation() {

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by IvanOP on 28.04.2017.
@@ -20,7 +22,7 @@ public class FrameHolder extends JFrame implements KeyListener {
 
         guiHolder.setFocusable(true);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.add(beeHive, BorderLayout.WEST);
         frame.add(guiHolder, BorderLayout.EAST);
         frame.pack();
@@ -28,7 +30,18 @@ public class FrameHolder extends JFrame implements KeyListener {
         frame.addKeyListener(this);
         frame.setFocusable(true);
         frame.setFocusTraversalKeysEnabled(false);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                doSomething();
+            }
+        });
+    }
 
+    void doSomething() {
+        System.out.println("asdf");
+        frame.dispose();
+        System.exit(0);
     }
 
     @Override

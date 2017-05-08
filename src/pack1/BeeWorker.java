@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class BeeWorker extends AbstractBee implements IBehaviour {
     private static Image img;
-    private static String ident;
+    static String identification;
 
     static {
         try {
@@ -18,7 +18,7 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ident = String.valueOf(BeeWorker.class.getSimpleName());
+        identification = String.valueOf(BeeWorker.class.getSimpleName());
     }
 
 
@@ -28,7 +28,11 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
     }
 
     BeeWorker(int lifeTime, long hashCode) {
-        super(lifeTime, hashCode, ident);
+        super(lifeTime, hashCode, identification);
+    }
+
+    public String getIdentification() {
+        return identification;
     }
 
 

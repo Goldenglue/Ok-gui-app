@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.PipedReader;
+import java.io.PipedWriter;
 import java.util.Map;
 
 /**
@@ -28,6 +31,40 @@ public class GUIHolder extends JPanel implements ActionListener {
     private JMenu menu, submenu;
     private JMenuItem menuItem;
     private JToolBar toolBar;
+    private JTextArea textAreaOfConsole;
+    private PipedWriter pipedOutputStreamFromConsole;
+    private PipedReader pipedInputStreamFromHabitat;
+    private String messageToHabitat = "";
+    private int population;
+
+    private Thread pipedInputStreamThread = new Thread(() -> {
+        while (true) {
+            try {
+                Thread.sleep(100);
+                population = pipedInputStreamFromHabitat.read();
+                if (population != 0) {
+                    System.out.println(population);
+                    textAreaOfConsole.append(String.valueOf(population) + "\n");
+                }
+                population = 0;
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    private Thread pipedOutputStreamThread = new Thread(() -> {
+        while (true) {
+
+            try {
+                Thread.sleep(100);
+                pipedOutputStreamFromConsole.write(messageToHabitat);
+                messageToHabitat = "";
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+
 
     public GUIHolder(Habitat habitat, JFrame frameHolder) {
         setBackground(Color.WHITE);
@@ -56,6 +93,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         stopButton = new JButton("Stop simulation");
         stopButton.setEnabled(false);
         stopButton.addActionListener(actionEvent -> {
+            frameOwner.requestFocusInWindow();
             createModalWindowOfStats();
             dialog.setVisible(true);
             habitat.stopSimulation();
@@ -366,6 +404,22 @@ public class GUIHolder extends JPanel implements ActionListener {
         });
         menu.add(menuItem);
 
+        menuItem = new JMenuItem("Console");
+        menuItem.addActionListener(actionEvent -> {
+            try {
+                habitat.initializePipedStreams();
+                pipedOutputStreamFromConsole = new PipedWriter();
+                pipedOutputStreamFromConsole.connect(habitat.pipedInputStreamFromConsole);
+                pipedInputStreamFromHabitat = new PipedReader(habitat.pipedOutputStreamToConsole);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            getConsole();
+            pipedInputStreamThread.start();
+            pipedOutputStreamThread.start();
+        });
+        menu.add(menuItem);
+
         //a submenu
         menu.addSeparator();
         submenu = new JMenu("A submenu");
@@ -445,6 +499,34 @@ public class GUIHolder extends JPanel implements ActionListener {
         toolBar.add(button);
 
         return toolBar;
+    }
+
+    private void getConsole() {
+        JFrame jFrame = new JFrame("Console window");
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new GridBagLayout());
+        textAreaOfConsole = new JTextArea(20, 50);
+        JTextField jTextField = new JTextField(20);
+
+        jTextField.addActionListener(actionEvent -> {
+            messageToHabitat = jTextField.getText();
+            textAreaOfConsole.append(jTextField.getText() + "\n");
+            jTextField.setText("");
+        });
+        JScrollPane jScrollPane = new JScrollPane(textAreaOfConsole);
+        textAreaOfConsole.setLineWrap(true);
+        jPanel.add(jTextField, new GridBagConstraints(0, 0, 1, 1, 0.5, 0,
+                GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
+        jPanel.add(jScrollPane, new GridBagConstraints(0, 1, 1, 1, 0.5, 0,
+                GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
+
+        jFrame.add(jPanel);
+        jFrame.pack();
+        jFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        jFrame.setVisible(true);
+        jFrame.setFocusable(true);
     }
 
 
