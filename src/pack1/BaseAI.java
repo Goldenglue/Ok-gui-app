@@ -19,6 +19,7 @@ abstract class BaseAI implements Runnable{
         this.bee = bee;
     }
 
+
     synchronized void pauseThread() {}
     synchronized void resumeThread() {}
 }

@@ -34,6 +34,10 @@ public class CollectionsForObjects {
         return abstractBeeArrayList;
     }
 
+    public static void setAbstractBeeArrayList(ArrayList<AbstractBee> abstractBeeArrayList) {
+        CollectionsForObjects.abstractBeeArrayList = abstractBeeArrayList;
+    }
+
     TreeMap<Long, Long> getLongLongTreeMap() {
         return longLongTreeMap;
     }

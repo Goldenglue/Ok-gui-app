@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -23,6 +22,8 @@ public class GUIHolder extends JPanel implements ActionListener {
     private JFrame frameOwner;
     private JTextField textFieldOfMaleBeePeriod;
     private JTextField textFieldOfBeeWorkerPeriod;
+    JTextField lifeTimeOfMaleBee;
+    JTextField lifeTimeOfBeeWorker;
     private JComboBox comboBox;
     private DefaultListModel listModel;
     private JList jList;
@@ -32,6 +33,8 @@ public class GUIHolder extends JPanel implements ActionListener {
     private JMenuItem menuItem;
     private JToolBar toolBar;
     private JTextArea textAreaOfConsole;
+    private JComboBox<Integer> comboBoxOfMaleBeeThreadPriorities;
+    private JComboBox<Integer> comboBoxOfBeeWorkerThreadPriorities;
     private PipedWriter pipedOutputStreamFromConsole;
     private PipedReader pipedInputStreamFromHabitat;
     private String messageToHabitat = "";
@@ -71,13 +74,14 @@ public class GUIHolder extends JPanel implements ActionListener {
         this.habitat = habitat;
         this.frameOwner = frameHolder;
         createAndShowGUI();
+        loadConfiguration();
     }
 
     public Dimension getPreferredSize() {
         return new Dimension(200, 800);
     }
 
-    private void createAndShowGUI() {
+    private synchronized void createAndShowGUI() {
         this.setLayout(new GridBagLayout());
 
         startButton = new JButton("Start simulation");
@@ -85,6 +89,9 @@ public class GUIHolder extends JPanel implements ActionListener {
             habitat.startSimulation();
             startButton.setEnabled(false);
             stopButton.setEnabled(true);
+            if (CollectionsForObjects.getInstance().getAbstractBeeArrayList().size() > 0) {
+                CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(AbstractBee::setBaseAI);
+            }
         });
         add(startButton, new GridBagConstraints(0, 0, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
@@ -174,7 +181,7 @@ public class GUIHolder extends JPanel implements ActionListener {
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-        JTextField lifeTimeOfMaleBee = new JTextField();
+        lifeTimeOfMaleBee = new JTextField();
         lifeTimeOfMaleBee.setText("Life time of male bee = " + habitat.lifeTimeOfMaleBee);
         add(lifeTimeOfMaleBee, new GridBagConstraints(0, 10, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
@@ -185,7 +192,7 @@ public class GUIHolder extends JPanel implements ActionListener {
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-        JTextField lifeTimeOfBeeWorker = new JTextField();
+        lifeTimeOfBeeWorker = new JTextField();
         lifeTimeOfBeeWorker.setText("Life time of bee worker = " + habitat.lifeTimeOfBeeWorker);
         add(lifeTimeOfBeeWorker, new GridBagConstraints(0, 12, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
@@ -221,6 +228,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         add(jLabelOfProbabilityJLIst, new GridBagConstraints(0, 16, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         listModel = new DefaultListModel();
         for (String probabilityValue : probabilityValues) {
             listModel.addElement(probabilityValue);
@@ -233,6 +241,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         add(jScrollPane, new GridBagConstraints(0, 17, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         getSelectedProbabilityFromComboBox = new JButton("Select from combo box");
         getSelectedProbabilityFromComboBox.addActionListener(actionEvent -> {
             String value = (String) comboBox.getSelectedItem();
@@ -284,15 +293,16 @@ public class GUIHolder extends JPanel implements ActionListener {
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-        //String[] priorities = {"1","2","3","4","5","6","7","8","9","10"};
+
         JLabel jLabelOfMaleBeeThreadPriorityComboBox = new JLabel("Male bee thread priority");
         add(jLabelOfMaleBeeThreadPriorityComboBox, new GridBagConstraints(0, 24, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         Integer[] ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        JComboBox<Integer> jComboBoxOfMaleBee = new JComboBox<>(ints);
-        jComboBoxOfMaleBee.setSelectedIndex(4);
-        add(jComboBoxOfMaleBee, new GridBagConstraints(0, 25, 2, 1, 0.5, 0,
+        comboBoxOfMaleBeeThreadPriorities = new JComboBox<>(ints);
+        comboBoxOfMaleBeeThreadPriorities.setSelectedIndex(4);
+        add(comboBoxOfMaleBeeThreadPriorities, new GridBagConstraints(0, 25, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
@@ -301,17 +311,22 @@ public class GUIHolder extends JPanel implements ActionListener {
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-        JComboBox<Integer> jComboBoxOfBeeWorker = new JComboBox<>(ints);
-        jComboBoxOfBeeWorker.setSelectedIndex(4);
-        add(jComboBoxOfBeeWorker, new GridBagConstraints(0, 27, 2, 1, 0.5, 0,
+        comboBoxOfBeeWorkerThreadPriorities = new JComboBox<>(ints);
+        comboBoxOfBeeWorkerThreadPriorities.setSelectedIndex(4);
+        add(comboBoxOfBeeWorkerThreadPriorities, new GridBagConstraints(0, 27, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JButton readPriorities = new JButton("Set thread priorities");
         readPriorities.addActionListener(actionEvent -> {
-            CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                abstractBee.baseAI.movementThread.setPriority((int) jComboBoxOfBeeWorker.getSelectedItem());
-            });
+            javaDeserialization();
+            /*CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                if (abstractBee.getIdentification().equals("BeeWorker")) {
+                    abstractBee.baseAI.movementThread.setPriority((int) comboBoxOfBeeWorkerThreadPriorities.getSelectedItem());
+                } else {
+                    abstractBee.baseAI.movementThread.setPriority((int) comboBoxOfMaleBeeThreadPriorities.getSelectedItem());
+                }
+            });*/
         });
         add(readPriorities, new GridBagConstraints(0, 28, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
@@ -529,5 +544,80 @@ public class GUIHolder extends JPanel implements ActionListener {
         jFrame.setFocusable(true);
     }
 
+    private void loadConfiguration() {
+        File configurationFile = new File("configuration.txt");
+        try (BufferedReader readingFromConfigurationFile = new BufferedReader(new FileReader(configurationFile))) {
+            habitat.maleBeeUpdatePeriod = Float.parseFloat(readingFromConfigurationFile.readLine());
+            habitat.beeWorkerUpdatePeriod = Float.parseFloat(readingFromConfigurationFile.readLine());
+
+            habitat.maleBeeUpdateTimer.setDelay(((int) habitat.maleBeeUpdatePeriod));
+            habitat.beeWorkerUpdateTimer.setDelay(((int) habitat.beeWorkerUpdatePeriod));
+
+            textFieldOfMaleBeePeriod.setText("Current T: " + String.valueOf(habitat.maleBeeUpdatePeriod / 1000));
+            textFieldOfBeeWorkerPeriod.setText("Current T: " + String.valueOf(habitat.beeWorkerUpdatePeriod / 1000));
+
+            habitat.lifeTimeOfMaleBee = Integer.parseInt(readingFromConfigurationFile.readLine());
+            habitat.lifeTimeOfBeeWorker = Integer.parseInt(readingFromConfigurationFile.readLine());
+
+            lifeTimeOfMaleBee.setText("Life time of male bee = " + habitat.lifeTimeOfMaleBee);
+            lifeTimeOfBeeWorker.setText("Life time of bee worker = " + habitat.lifeTimeOfBeeWorker);
+
+            habitat.probability = Double.parseDouble(readingFromConfigurationFile.readLine());
+            comboBox.setSelectedIndex((int) (habitat.probability * 10));
+            jList.setSelectedIndex((int) (habitat.probability * 10));
+
+
+            comboBoxOfMaleBeeThreadPriorities.setSelectedItem(readingFromConfigurationFile.readLine());
+            comboBoxOfBeeWorkerThreadPriorities.setSelectedItem(readingFromConfigurationFile.readLine());
+
+            CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                if (abstractBee.getIdentification().equals("BeeWorker")) {
+                    abstractBee.baseAI.movementThread.setPriority((int) comboBoxOfBeeWorkerThreadPriorities.getSelectedItem());
+                } else {
+                    abstractBee.baseAI.movementThread.setPriority((int) comboBoxOfMaleBeeThreadPriorities.getSelectedItem());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void saveConfiguration() {
+        javaSerialization();
+        File configurationFile = new File("configuration.txt");
+        try (BufferedWriter writeToConfigureFile = new BufferedWriter(new FileWriter(configurationFile))) {
+            writeToConfigureFile.write(String.valueOf(habitat.maleBeeUpdatePeriod) + "\n");
+            writeToConfigureFile.write(String.valueOf(habitat.beeWorkerUpdatePeriod) + "\n");
+            writeToConfigureFile.write(String.valueOf(habitat.lifeTimeOfMaleBee) + "\n");
+            writeToConfigureFile.write(String.valueOf(habitat.lifeTimeOfBeeWorker) + "\n");
+            writeToConfigureFile.write(String.valueOf(habitat.probability) + "\n");
+            writeToConfigureFile.write(String.valueOf(comboBoxOfMaleBeeThreadPriorities.getSelectedItem()) + "\n");
+            writeToConfigureFile.write(String.valueOf(comboBoxOfBeeWorkerThreadPriorities.getSelectedItem()) + "\n");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void javaSerialization() {
+        File serializedObjectsFile = new File("serialized objects.txt");
+        try (ObjectOutputStream serializationOutputStream = new ObjectOutputStream(new FileOutputStream(serializedObjectsFile))) {
+            serializationOutputStream.writeObject(CollectionsForObjects.getInstance().getAbstractBeeArrayList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void javaDeserialization() {
+        File serializedObjectsFile = new File("serialized objects.txt");
+        try (ObjectInputStream serializationInputStream = new ObjectInputStream(new FileInputStream(serializedObjectsFile))) {
+            CollectionsForObjects.setAbstractBeeArrayList((ArrayList<AbstractBee>) serializationInputStream.readObject());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -6,6 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Created by IvanOP on 28.04.2017.
@@ -38,8 +42,8 @@ public class FrameHolder extends JFrame implements KeyListener {
         });
     }
 
-    void doSomething() {
-        System.out.println("asdf");
+    private void doSomething() {
+        guiHolder.saveConfiguration();
         frame.dispose();
         System.exit(0);
     }

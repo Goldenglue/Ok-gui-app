@@ -4,13 +4,14 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 
 /**
  * Created by IvanOP on 02.04.2017.
  */
-public class MaleBee extends AbstractBee implements IBehaviour {
-    private static Image img;
+public class MaleBee extends AbstractBee implements IBehaviour, Serializable {
+    private transient static Image img;
     static String identification;
 
     static {
@@ -34,9 +35,16 @@ public class MaleBee extends AbstractBee implements IBehaviour {
         super(lifeTime, hashCode,identification);
     }
 
+    MaleBee() {
+        System.out.println("male beeeeeeeeeeeeeeee");
+    }
+
     public String getIdentification() {
         return identification;
     }
 
-
+    @Override
+    public void setBaseAI() {
+        baseAI = new MaleBeeBaseAI(this);
+    }
 }

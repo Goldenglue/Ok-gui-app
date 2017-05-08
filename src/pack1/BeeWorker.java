@@ -4,12 +4,13 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by IvanOP on 02.04.2017.
  */
-public class BeeWorker extends AbstractBee implements IBehaviour {
-    private static Image img;
+public class BeeWorker extends AbstractBee implements IBehaviour, Serializable {
+    private transient static Image img;
     static String identification;
 
     static {
@@ -31,9 +32,14 @@ public class BeeWorker extends AbstractBee implements IBehaviour {
         super(lifeTime, hashCode, identification);
     }
 
+    BeeWorker() {}
+
     public String getIdentification() {
         return identification;
     }
 
-
+    @Override
+    public void setBaseAI() {
+        baseAI = new BeeWorkerBaseAI(this);
+    }
 }

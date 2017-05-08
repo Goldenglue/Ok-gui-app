@@ -1,17 +1,18 @@
 package pack1;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by IvanOP on 02.04.2017.
  */
-public abstract class AbstractBee {
-    final Point initialLocation;
+public abstract class AbstractBee implements Serializable {
+    Point initialLocation;
     Point currentLocation;
     int speed = 25;
     int lifeTime;
     private long hashCode;
-    BaseAI baseAI;
+    transient BaseAI baseAI;
     private String identification;
 
     AbstractBee(int lifeTime, long hashCode, String ident) {
@@ -25,8 +26,14 @@ public abstract class AbstractBee {
         } else {
             baseAI = new MaleBeeBaseAI(this);
         }
+
     }
+
+    AbstractBee() {
+    }
+
 
     public abstract void paintComponent(Graphics g);
     public String getIdentification() {return identification;}
+    public void setBaseAI() {}
 }
