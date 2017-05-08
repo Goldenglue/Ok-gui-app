@@ -6,35 +6,15 @@ import java.awt.*;
 /**
  * Created by IvanOP on 07.05.2017.
  */
-public class BeeWorkerBaseAI extends BaseAI {
-    private AbstractBee bee;
-
-    private Runnable movement = () -> {
-        while (true) {
-            synchronized (this) {
-                while (!isRunning) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            moveSomewhere();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    };
+public class BeeWorkerBaseAI extends BaseAI implements Runnable {
 
     BeeWorkerBaseAI(AbstractBee bee) {
-        this.bee = bee;
+        super(bee);
         setRandomDestination();
         distance = (int) Math.sqrt(Math.pow(bee.currentLocation.getX() - destinationPoint.getX(), 2) +
                 Math.pow(bee.currentLocation.getY() - destinationPoint.getY(), 2));
-        startThread();
+        movementThread =  new Thread(this);
+        movementThread.start();
         timer.start();
     }
 
@@ -60,12 +40,6 @@ public class BeeWorkerBaseAI extends BaseAI {
     });
 
     @Override
-    synchronized void startThread() {
-        movementThread = new Thread(movement);
-        movementThread.start();
-    }
-
-    @Override
     synchronized void pauseThread() {
         isRunning = false;
     }
@@ -74,5 +48,26 @@ public class BeeWorkerBaseAI extends BaseAI {
     synchronized void resumeThread() {
         isRunning = true;
         this.notify();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (this) {
+                while (!isRunning) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            moveSomewhere();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

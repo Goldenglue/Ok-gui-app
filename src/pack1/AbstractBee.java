@@ -11,14 +11,18 @@ public abstract class AbstractBee {
     int speed = 25;
     int lifeTime;
     private long hashCode;
-    BeeWorkerBaseAI beeWorkerBaseAI;
-    MaleBeeBaseAI maleBeeBaseAI;
+    BaseAI baseAI;
 
-    AbstractBee(int lifeTime, long hashCode) {
+    AbstractBee(int lifeTime, long hashCode, String ident) {
         this.initialLocation =  new Point((int) (Math.random() * 600),70 + (int) (Math.random() * 700));
         this.currentLocation =  new Point(initialLocation);
         this.lifeTime = lifeTime;
         this.hashCode = hashCode;
+        if (ident.equals("BeeWorker")) {
+            baseAI = new BeeWorkerBaseAI(this);
+        } else {
+            baseAI = new MaleBeeBaseAI(this);
+        }
     }
 
     public abstract void paintComponent(Graphics g);

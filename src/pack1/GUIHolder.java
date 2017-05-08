@@ -229,24 +229,17 @@ public class GUIHolder extends JPanel implements ActionListener {
         JButton pauseThreads = new JButton("Pause threads");
         pauseThreads.addActionListener(actionEvent -> {
             CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                if (abstractBee.beeWorkerBaseAI != null) {
-                    abstractBee.beeWorkerBaseAI.pauseThread();
-                } else {
-                    abstractBee.maleBeeBaseAI.pauseThread();
-                }
+                abstractBee.baseAI.pauseThread();
             });
         });
         add(pauseThreads, new GridBagConstraints(0, 22, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         JButton resumeThreads = new JButton("Resume threads");
         resumeThreads.addActionListener(actionEvent -> {
             CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                if (abstractBee.beeWorkerBaseAI != null) {
-                    abstractBee.beeWorkerBaseAI.resumeThread();
-                } else {
-                    abstractBee.maleBeeBaseAI.resumeThread();
-                }
+                abstractBee.baseAI.resumeThread();
             });
         });
         add(resumeThreads, new GridBagConstraints(0, 23, 2, 1, 0.5, 0,
@@ -264,23 +257,22 @@ public class GUIHolder extends JPanel implements ActionListener {
         add(jComboBoxOfMaleBee, new GridBagConstraints(0, 25, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         JLabel jLabelOfBeeWorkerPriorityComboBox = new JLabel("Bee worker thread priority");
         add(jLabelOfBeeWorkerPriorityComboBox, new GridBagConstraints(0, 26, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         JComboBox<Integer> jComboBoxOfBeeWorker = new JComboBox<>(ints);
         jComboBoxOfBeeWorker.setSelectedIndex(4);
         add(jComboBoxOfBeeWorker, new GridBagConstraints(0, 27, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
+
         JButton readPriorities = new JButton("Set thread priorities");
         readPriorities.addActionListener(actionEvent -> {
             CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                if (abstractBee.beeWorkerBaseAI != null) {
-                    abstractBee.beeWorkerBaseAI.movementThread.setPriority((int) jComboBoxOfBeeWorker.getSelectedItem());
-                } else {
-                    abstractBee.maleBeeBaseAI.movementThread.setPriority((int) jComboBoxOfMaleBee.getSelectedItem());
-                }
+                abstractBee.baseAI.movementThread.setPriority((int) jComboBoxOfBeeWorker.getSelectedItem());
             });
         });
         add(readPriorities, new GridBagConstraints(0, 28, 2, 1, 0.5, 0,

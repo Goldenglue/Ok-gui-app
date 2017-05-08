@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="324c0366-a69e-4d78-ac32-1f1dcd46c42d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/AbstractBee.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/AbstractBee.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/BaseAI.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/BaseAI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/Habitat.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/Habitat.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/MaleBeeBaseAI.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/MaleBeeBaseAI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/BeeWorker.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/BeeWorker.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/GUIHolder.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/GUIHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/programming technology/pack1/MaleBee.class" afterPath="$PROJECT_DIR$/out/production/programming technology/pack1/MaleBee.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/AbstractBee.java" afterPath="$PROJECT_DIR$/src/pack1/AbstractBee.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/BaseAI.java" afterPath="$PROJECT_DIR$/src/pack1/BaseAI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/BeeWorker.java" afterPath="$PROJECT_DIR$/src/pack1/BeeWorker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java" afterPath="$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/GUIHolder.java" afterPath="$PROJECT_DIR$/src/pack1/GUIHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/Habitat.java" afterPath="$PROJECT_DIR$/src/pack1/Habitat.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/MaleBee.java" afterPath="$PROJECT_DIR$/src/pack1/MaleBee.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java" afterPath="$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java" />
     </list>
@@ -33,20 +31,22 @@
       <file leaf-file-name="Habitat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pack1/Habitat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="17">
               <caret line="59" column="5" lean-forward="false" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1357#1358#0" expanded="true" />
+                <element signature="e#1403#1404#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUIHolder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUIHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pack1/GUIHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3757">
-              <caret line="227" column="8" lean-forward="false" selection-start-line="227" selection-start-column="8" selection-end-line="227" selection-end-column="8" />
+            <state relative-caret-position="326">
+              <caret line="257" column="72" lean-forward="true" selection-start-line="257" selection-start-column="72" selection-end-line="257" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -56,27 +56,20 @@
         <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="30" column="52" lean-forward="false" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
-              <folding />
+              <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+              <folding>
+                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#768#769#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pack1/AbstractFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="59" lean-forward="false" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MaleBee.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MaleBee.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pack1/MaleBee.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="33" column="48" lean-forward="true" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+              <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -85,8 +78,8 @@
       <file leaf-file-name="AbstractBee.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pack1/AbstractBee.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            <state relative-caret-position="442">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -95,9 +88,12 @@
       <file leaf-file-name="BaseAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pack1/BaseAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-              <folding />
+            <state relative-caret-position="306">
+              <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+              <folding>
+                <element signature="e#337#338#0" expanded="true" />
+                <element signature="e#367#368#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,12 +101,25 @@
       <file leaf-file-name="BeeWorkerBaseAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+            <state relative-caret-position="187">
+              <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2311#2312#0" expanded="true" />
-                <element signature="e#2344#2345#0" expanded="true" />
+                <element signature="e#1669#1670#0" expanded="true" />
+                <element signature="e#1702#1703#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MaleBeeBaseAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+              <folding>
+                <element signature="e#2368#2369#0" expanded="true" />
+                <element signature="e#2401#2402#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,24 +129,11 @@
         <entry file="file://$PROJECT_DIR$/src/pack1/ConcreteFactory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="67" lean-forward="true" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+              <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
               <folding>
                 <element signature="e#251#252#0" expanded="true" />
                 <element signature="e#336#337#0" expanded="true" />
                 <element signature="e#392#393#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MaleBeeBaseAI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1598">
-              <caret line="94" column="8" lean-forward="false" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
-              <folding>
-                <element signature="e#3293#3294#0" expanded="true" />
-                <element signature="e#3326#3327#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,6 +181,9 @@
       </list>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/pack1/AbstractBee.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -199,19 +198,19 @@
         <option value="$PROJECT_DIR$/src/pack1/ConcreteFactory.java" />
         <option value="$PROJECT_DIR$/src/pack1/Habitat.java" />
         <option value="$PROJECT_DIR$/src/pack1/BaseAI.java" />
-        <option value="$PROJECT_DIR$/src/pack1/AbstractBee.java" />
-        <option value="$PROJECT_DIR$/src/pack1/MaleBee.java" />
-        <option value="$PROJECT_DIR$/src/pack1/BeeWorker.java" />
         <option value="$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java" />
         <option value="$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java" />
+        <option value="$PROJECT_DIR$/src/pack1/MaleBee.java" />
+        <option value="$PROJECT_DIR$/src/pack1/BeeWorker.java" />
         <option value="$PROJECT_DIR$/src/pack1/GUIHolder.java" />
+        <option value="$PROJECT_DIR$/src/pack1/AbstractBee.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1932" />
+    <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -548,10 +547,18 @@
       <option name="presentableId" value="Default" />
       <updated>1491124381914</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added movement to bee workers :bee: and updated gui. Bee workers move in some random direction but stay inside the screen. Probably have to redo all this stuff cause pause/resume threads is just trash.">
+      <created>1494174978339</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1494174978339</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -569,7 +576,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15438034" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15565032" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18017058" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -581,7 +589,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -643,9 +650,13 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added movement to bee workers :bee: and updated gui. Bee workers move in some random direction but stay inside the screen. Probably have to redo all this stuff cause pause/resume threads is just trash." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added movement to bee workers :bee: and updated gui. Bee workers move in some random direction but stay inside the screen. Probably have to redo all this stuff cause pause/resume threads is just trash." />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -658,7 +669,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="21" column="86" lean-forward="false" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="86" />
-          <folding />
+          <folding>
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -681,7 +695,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
+          <folding>
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -698,6 +716,8 @@
           <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -724,7 +744,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="21" column="86" lean-forward="false" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="86" />
-          <folding />
+          <folding>
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -747,7 +770,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
+          <folding>
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -764,6 +791,8 @@
           <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -790,7 +819,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="21" column="86" lean-forward="false" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="86" />
-          <folding />
+          <folding>
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -813,7 +845,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
+          <folding>
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -830,6 +866,8 @@
           <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,6 +888,8 @@
           <caret line="57" column="69" lean-forward="true" selection-start-line="57" selection-start-column="69" selection-end-line="57" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -881,7 +921,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -896,7 +940,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -950,13 +997,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_121/jre/lib/rt.jar!/java/lang/Runnable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pack1/FlightOfTheBumblebee.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -987,30 +1027,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pack1/MaleBee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="33" column="48" lean-forward="true" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="30" column="52" lean-forward="false" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pack1/ConcreteFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="67" lean-forward="true" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+          <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
           <folding>
             <element signature="e#251#252#0" expanded="true" />
             <element signature="e#336#337#0" expanded="true" />
@@ -1019,59 +1042,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java">
+    <entry file="jar://E:/Program Files/Java/jdk1.8.0_121/jre/lib/rt.jar!/java/lang/Runnable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2311#2312#0" expanded="true" />
-            <element signature="e#2344#2345#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pack1/AbstractBee.java">
+    <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorkerBaseAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-          <folding />
+        <state relative-caret-position="187">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1669#1670#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pack1/MaleBeeBaseAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="94" column="8" lean-forward="false" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
+        <state relative-caret-position="272">
+          <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
           <folding>
-            <element signature="e#3293#3294#0" expanded="true" />
-            <element signature="e#3326#3327#0" expanded="true" />
+            <element signature="e#2368#2369#0" expanded="true" />
+            <element signature="e#2401#2402#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pack1/Habitat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="59" column="5" lean-forward="false" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pack1/BaseAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="306">
+          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="e#337#338#0" expanded="true" />
+            <element signature="e#367#368#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pack1/Habitat.java">
+    <entry file="file://$PROJECT_DIR$/src/pack1/BeeWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="59" column="5" lean-forward="false" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+        <state relative-caret-position="459">
+          <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pack1/GUIHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3757">
-          <caret line="227" column="8" lean-forward="false" selection-start-line="227" selection-start-column="8" selection-end-line="227" selection-end-column="8" />
+        <state relative-caret-position="326">
+          <caret line="257" column="72" lean-forward="true" selection-start-line="257" selection-start-column="72" selection-end-line="257" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pack1/AbstractBee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pack1/MaleBee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
           <folding />
         </state>
       </provider>

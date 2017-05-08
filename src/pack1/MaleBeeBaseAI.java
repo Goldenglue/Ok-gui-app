@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by IvanOP on 07.05.2017.
  */
-public class MaleBeeBaseAI extends BaseAI {
+public class MaleBeeBaseAI extends BaseAI implements Runnable {
 
     private boolean doIMoveToCorner = true;
     private static final Point topLeftCorner = new Point(0, 50);
@@ -14,44 +14,16 @@ public class MaleBeeBaseAI extends BaseAI {
     private static final Point bottomRightCorner = new Point(600, 700);
     private static final Point[] corners = {topLeftCorner, topRightCorner, bottomLeftCorner, bottomRightCorner};
 
-    private Runnable movement = () -> {
-        while (true) {
-            synchronized (this) {
-                while (!isRunning) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            if (doIMoveToCorner) {
-                moveToDestinationPoint();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                moveToInitialPoint();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
     MaleBeeBaseAI(AbstractBee bee) {
-        this.bee = bee;
+        super(bee);
         destinationPoint = new Point(getCorner());
         initialPoint = new Point(bee.initialLocation);
         distance = (int) Math.sqrt(Math.pow(initialPoint.getX() - destinationPoint.getX(), 2) +
                 Math.pow(initialPoint.getY() - destinationPoint.getY(), 2));
         dx = (((destinationPoint.getX() - initialPoint.getX()) / distance) * bee.speed);
         dy = (((destinationPoint.getY() - initialPoint.getY()) / distance) * bee.speed);
-        startThread();
+        movementThread =  new Thread(this);
+        movementThread.start();
     }
 
     private Point getCorner() {
@@ -80,12 +52,6 @@ public class MaleBeeBaseAI extends BaseAI {
     }
 
     @Override
-    synchronized void startThread() {
-        movementThread = new Thread(movement);
-        movementThread.start();
-    }
-
-    @Override
     synchronized void pauseThread() {
         isRunning = false;
     }
@@ -94,5 +60,35 @@ public class MaleBeeBaseAI extends BaseAI {
     synchronized void resumeThread() {
         isRunning = true;
         this.notify();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (this) {
+                while (!isRunning) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if (doIMoveToCorner) {
+                moveToDestinationPoint();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                moveToInitialPoint();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
