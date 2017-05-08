@@ -34,7 +34,7 @@ public class Habitat extends JPanel {
     private boolean isReturningMaleBee =  false;
     private boolean isReturningBeeWorker =  false;
     private char[] buffer =  new char[6];
-    Thread pipedOutputStreamToConsoleThread = new Thread(() -> {
+    private Thread pipedOutputStreamToConsoleThread = new Thread(() -> {
         while (true) {
             try {
                 if (isReturningMaleBee) {
@@ -52,7 +52,7 @@ public class Habitat extends JPanel {
             }
         }
     });
-    Thread pipedInputStreamFromConsoleThread =  new Thread(() -> {
+    private Thread pipedInputStreamFromConsoleThread =  new Thread(() -> {
        while (true) {
            try {
                pipedInputStreamFromConsole.read(buffer,0,6);
@@ -80,7 +80,7 @@ public class Habitat extends JPanel {
     });
 
 
-    Runnable paint = () -> {
+    private Runnable paint = () -> {
         while (true) {
             repaint();
             try {
@@ -116,8 +116,6 @@ public class Habitat extends JPanel {
         if (doIShowTime) {
             g.drawString("Simulation time: " + String.valueOf(simulationTime), 50, 50);
         }
-
-
         CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> abstractBee.paintComponent(g));
 
     }
@@ -126,6 +124,7 @@ public class Habitat extends JPanel {
         maleBeeUpdateTimer = new Timer(((int) maleBeeUpdatePeriod), actionEvent -> {
             if (((float) maleBeeCounter / (float) hivePopulation) < probability) {
                 long uniqueIdentity = (long) (Math.random() * Long.MAX_VALUE);
+                System.out.println(uniqueIdentity);
                 CollectionsForObjects.getInstance().addObject(factory.produceMaleBee(lifeTimeOfMaleBee, uniqueIdentity));
                 CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(uniqueIdentity);
                 simulationTime = (System.currentTimeMillis() - simulationStartTime) / 1000;
@@ -137,6 +136,7 @@ public class Habitat extends JPanel {
 
         beeWorkerUpdateTimer = new Timer(((int) beeWorkerUpdatePeriod), actionEvent -> {
             long uniqueIdentity = (long) (Math.random() * Long.MAX_VALUE);
+            System.out.println(uniqueIdentity);
             CollectionsForObjects.getInstance().addObject(factory.produceBeeWorker(lifeTimeOfBeeWorker, uniqueIdentity));
             CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(uniqueIdentity);
             simulationTime = (System.currentTimeMillis() - simulationStartTime) / 1000;

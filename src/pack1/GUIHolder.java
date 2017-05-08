@@ -600,7 +600,7 @@ public class GUIHolder extends JPanel implements ActionListener {
     }
 
     private void javaSerialization() {
-        File serializedObjectsFile = new File("serialized objects.txt");
+        File serializedObjectsFile = new File("serialized objects.bin");
         try (ObjectOutputStream serializationOutputStream = new ObjectOutputStream(new FileOutputStream(serializedObjectsFile))) {
             serializationOutputStream.writeObject(CollectionsForObjects.getInstance().getAbstractBeeArrayList());
         } catch (IOException e) {
@@ -609,13 +609,17 @@ public class GUIHolder extends JPanel implements ActionListener {
     }
 
     private void javaDeserialization() {
-        File serializedObjectsFile = new File("serialized objects.txt");
+        File serializedObjectsFile = new File("serialized objects.bin");
         try (ObjectInputStream serializationInputStream = new ObjectInputStream(new FileInputStream(serializedObjectsFile))) {
             CollectionsForObjects.setAbstractBeeArrayList((ArrayList<AbstractBee>) serializationInputStream.readObject());
+            CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                System.out.println(abstractBee.getHashCode());
+                CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(abstractBee.getHashCode());
+                CollectionsForObjects.getInstance().getLongLongTreeMap().put(abstractBee.getHashCode(), habitat.simulationTime);
+            });
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

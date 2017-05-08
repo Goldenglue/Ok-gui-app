@@ -32,8 +32,6 @@ public class BeeWorker extends AbstractBee implements IBehaviour, Serializable {
         super(lifeTime, hashCode, identification);
     }
 
-    BeeWorker() {}
-
     public String getIdentification() {
         return identification;
     }
@@ -42,4 +40,5 @@ public class BeeWorker extends AbstractBee implements IBehaviour, Serializable {
     public void setBaseAI() {
         baseAI = new BeeWorkerBaseAI(this);
     }
+
 }

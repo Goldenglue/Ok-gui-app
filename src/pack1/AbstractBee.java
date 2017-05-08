@@ -11,9 +11,9 @@ public abstract class AbstractBee implements Serializable {
     Point currentLocation;
     int speed = 25;
     int lifeTime;
-    private long hashCode;
     transient BaseAI baseAI;
     private String identification;
+    private long hashCode;
 
     AbstractBee(int lifeTime, long hashCode, String ident) {
         this.initialLocation =  new Point((int) (Math.random() * 600),70 + (int) (Math.random() * 700));
@@ -36,4 +36,8 @@ public abstract class AbstractBee implements Serializable {
     public abstract void paintComponent(Graphics g);
     public String getIdentification() {return identification;}
     public void setBaseAI() {}
+
+    public long getHashCode() {
+        return hashCode;
+    }
 }

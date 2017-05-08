@@ -35,10 +35,6 @@ public class MaleBee extends AbstractBee implements IBehaviour, Serializable {
         super(lifeTime, hashCode,identification);
     }
 
-    MaleBee() {
-        System.out.println("male beeeeeeeeeeeeeeee");
-    }
-
     public String getIdentification() {
         return identification;
     }
@@ -47,4 +43,5 @@ public class MaleBee extends AbstractBee implements IBehaviour, Serializable {
     public void setBaseAI() {
         baseAI = new MaleBeeBaseAI(this);
     }
+
 }
