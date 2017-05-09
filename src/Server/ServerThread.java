@@ -32,6 +32,7 @@ public class ServerThread extends Thread {
         ConnectionProtocol connectionProtocol = new ConnectionProtocol();
         try {
             while ((inputLine = toServer.readLine()) != null) {
+                //TODO make this thing beautiful
                 outputLine  = connectionProtocol.processInput(inputLine);
                 fromServer.println(outputLine);
             }
