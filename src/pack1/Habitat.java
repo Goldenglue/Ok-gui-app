@@ -1,8 +1,13 @@
 package pack1;
 
+import Server.ConnectionProtocol;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -13,7 +18,12 @@ public class Habitat extends JPanel {
 
     Timer maleBeeUpdateTimer;
     Timer beeWorkerUpdateTimer;
-    Timer checkForDeadBees;
+    private Timer checkForDeadBees;
+    Socket socket;
+    InetAddress host;
+    int serverPort = 4444;
+    PrintWriter toServer;
+    BufferedReader fromServer;
     int maleBeeCounter;
     int beeWorkerCounter;
     int hivePopulation;
@@ -31,9 +41,9 @@ public class Habitat extends JPanel {
     PipedReader pipedInputStreamFromConsole;
     private int currentAliveMaleBeeNumber;
     private int currentAliveBeeWorkerNumber;
-    private boolean isReturningMaleBee =  false;
-    private boolean isReturningBeeWorker =  false;
-    private char[] buffer =  new char[6];
+    private boolean isReturningMaleBee = false;
+    private boolean isReturningBeeWorker = false;
+    private char[] buffer = new char[6];
     private Thread pipedOutputStreamToConsoleThread = new Thread(() -> {
         while (true) {
             try {
@@ -52,31 +62,31 @@ public class Habitat extends JPanel {
             }
         }
     });
-    private Thread pipedInputStreamFromConsoleThread =  new Thread(() -> {
-       while (true) {
-           try {
-               pipedInputStreamFromConsole.read(buffer,0,6);
-               String string = String.valueOf(buffer);
-               if (string.equals("gcambn")) {
-                   CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                       if (abstractBee.getIdentification().equals("MaleBee")) {
-                           currentAliveMaleBeeNumber++;
-                       }
-                   });
-                   isReturningMaleBee =  true;
-               } else if (string.equals("gcabwn")) {
-                   CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                       if (abstractBee.getIdentification().equals("BeeWorker")) {
-                           currentAliveBeeWorkerNumber++;
-                       }
-                   });
-                   isReturningBeeWorker = true;
-               }
-               Thread.sleep(100);
-           } catch (IOException | InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
+    private Thread pipedInputStreamFromConsoleThread = new Thread(() -> {
+        while (true) {
+            try {
+                pipedInputStreamFromConsole.read(buffer, 0, 6);
+                String string = String.valueOf(buffer);
+                if (string.equals("gcambn")) {
+                    CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                        if (abstractBee.getIdentification().equals("MaleBee")) {
+                            currentAliveMaleBeeNumber++;
+                        }
+                    });
+                    isReturningMaleBee = true;
+                } else if (string.equals("gcabwn")) {
+                    CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
+                        if (abstractBee.getIdentification().equals("BeeWorker")) {
+                            currentAliveBeeWorkerNumber++;
+                        }
+                    });
+                    isReturningBeeWorker = true;
+                }
+                Thread.sleep(100);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     });
 
 
@@ -102,6 +112,7 @@ public class Habitat extends JPanel {
         this.maleBeeUpdatePeriod = 1300;
         this.beeWorkerUpdatePeriod = 1000;
         Updater();
+        connectToServer();
         paintThread = new Thread(paint);
         paintThread.start();
     }
@@ -171,21 +182,21 @@ public class Habitat extends JPanel {
 
     }
 
-    public void initializePipedStreams() throws IOException {
+    void initializePipedStreams() throws IOException {
         pipedOutputStreamToConsole = new PipedWriter();
         pipedInputStreamFromConsole = new PipedReader();
         pipedOutputStreamToConsoleThread.start();
         pipedInputStreamFromConsoleThread.start();
     }
 
-    public void startSimulation() {
+    void startSimulation() {
         simulationStartTime = System.currentTimeMillis();
         beeWorkerUpdateTimer.start();
         maleBeeUpdateTimer.start();
         checkForDeadBees.start();
     }
 
-    public void stopSimulation() {
+    void stopSimulation() {
         maleBeeUpdateTimer.stop();
         beeWorkerUpdateTimer.stop();
         checkForDeadBees.stop();
@@ -197,7 +208,7 @@ public class Habitat extends JPanel {
         repaint();
     }
 
-    public void showSimulationTime() {
+    void showSimulationTime() {
         if (!doIShowTime) {
             doIShowTime = !doIShowTime;
         } else {
@@ -205,5 +216,22 @@ public class Habitat extends JPanel {
         }
         repaint();
     }
+
+    private void connectToServer() {
+        try {
+            System.out.println("Connecting to server on port " + serverPort);
+            host = InetAddress.getByName("localhost");
+            socket = new Socket(host, serverPort);
+            toServer = new PrintWriter(socket.getOutputStream(),true);
+            fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println("Just connected to " + socket.getRemoteSocketAddress());
+            toServer.println("Hello from " + socket.getLocalSocketAddress());
+            toServer.flush();
+            System.out.println(fromServer.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

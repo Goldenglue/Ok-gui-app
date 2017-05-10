@@ -332,7 +332,6 @@ public class GUIHolder extends JPanel implements ActionListener {
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-
     }
 
 
@@ -599,6 +598,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         }
     }
 
+    //TODO make gui for this lul
     private void javaSerialization() {
         File serializedObjectsFile = new File("serialized objects.bin");
         try (ObjectOutputStream serializationOutputStream = new ObjectOutputStream(new FileOutputStream(serializedObjectsFile))) {

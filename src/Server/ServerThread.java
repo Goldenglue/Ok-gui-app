@@ -5,24 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IvanOP on 09.05.2017.
  */
 public class ServerThread extends Thread {
     private Socket socket = null;
-    private BufferedReader toServer;
-    private PrintWriter fromServer;
+    private BufferedReader fromClient;
+    private PrintWriter toClient;
     private int identification = 0;
     private String name = null;
-    private List<Integer> listOfClientsID;
+    private Map<Integer,ServerThread> serverThreadMap;
 
-    ServerThread (Socket socket, int identification, String name, List<Integer> list) {
+    ServerThread(Socket socket, int identification, String name, Map<Integer,ServerThread> serverThreadMap) {
         this.socket = socket;
         this.identification = identification;
         this.name = name;
-        this.listOfClientsID = list;
+        this.serverThreadMap = serverThreadMap;
+        this.start();
     }
 
     @Override
@@ -31,10 +32,14 @@ public class ServerThread extends Thread {
         connect();
         ConnectionProtocol connectionProtocol = new ConnectionProtocol();
         try {
-            while ((inputLine = toServer.readLine()) != null) {
+            while ((inputLine = fromClient.readLine()) != null) {
                 //TODO make this thing beautiful
-                outputLine  = connectionProtocol.processInput(inputLine);
-                fromServer.println(outputLine);
+
+                outputLine = connectionProtocol.processInput(inputLine);
+                System.out.println(inputLine);
+                //toClient.println(outputLine);
+                toClient.println("ya tuta");
+                toClient.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,8 +48,8 @@ public class ServerThread extends Thread {
 
     private void connect() {
         try {
-            fromServer =  new PrintWriter(socket.getOutputStream());
-            toServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            toClient = new PrintWriter(socket.getOutputStream());
+            fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
