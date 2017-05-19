@@ -22,7 +22,7 @@ public class MaleBeeBaseAI extends BaseAI implements Runnable {
                 Math.pow(initialPoint.getY() - destinationPoint.getY(), 2));
         dx = (((destinationPoint.getX() - initialPoint.getX()) / distance) * bee.speed);
         dy = (((destinationPoint.getY() - initialPoint.getY()) / distance) * bee.speed);
-        movementThread =  new Thread(this);
+        movementThread = new Thread(this);
         movementThread.start();
     }
 

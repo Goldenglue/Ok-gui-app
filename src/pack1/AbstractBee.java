@@ -30,6 +30,7 @@ public abstract class AbstractBee implements Serializable {
     }
 
     AbstractBee() {
+        System.out.println("absbee");
     }
 
 

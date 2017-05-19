@@ -5,7 +5,7 @@ package Server;
  */
 public class ConnectionProtocol {
 
-    public String processInput(String inputLine) {
+    public static String processInput(String inputLine) {
         String outPut = null;
         return outPut;
     }

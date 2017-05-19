@@ -1,13 +1,10 @@
 package pack1;
 
-import Server.ConnectionProtocol;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -222,7 +219,7 @@ public class Habitat extends JPanel {
             System.out.println("Connecting to server on port " + serverPort);
             host = InetAddress.getByName("localhost");
             socket = new Socket(host, serverPort);
-            toServer = new PrintWriter(socket.getOutputStream(),true);
+            toServer = new PrintWriter(socket.getOutputStream(), true);
             fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Just connected to " + socket.getRemoteSocketAddress());
             toServer.println("Hello from " + socket.getLocalSocketAddress());
@@ -231,6 +228,10 @@ public class Habitat extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getW() {
+        return this.getWidth();
     }
 
 

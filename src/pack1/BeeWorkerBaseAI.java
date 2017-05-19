@@ -13,7 +13,7 @@ public class BeeWorkerBaseAI extends BaseAI implements Runnable {
         setRandomDestination();
         distance = (int) Math.sqrt(Math.pow(bee.currentLocation.getX() - destinationPoint.getX(), 2) +
                 Math.pow(bee.currentLocation.getY() - destinationPoint.getY(), 2));
-        movementThread =  new Thread(this);
+        movementThread = new Thread(this);
         movementThread.start();
         timer.start();
     }

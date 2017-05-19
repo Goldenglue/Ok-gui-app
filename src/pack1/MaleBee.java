@@ -24,16 +24,16 @@ public class MaleBee extends AbstractBee implements IBehaviour, Serializable {
     }
 
 
-
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, (int)currentLocation.getX(), (int)currentLocation.getY(), null);
+        g.drawImage(img, (int) currentLocation.getX(), (int) currentLocation.getY(), null);
     }
 
 
     MaleBee(int lifeTime, long hashCode) {
-        super(lifeTime, hashCode,identification);
+        super(lifeTime, hashCode, identification);
     }
+
 
     public String getIdentification() {
         return identification;

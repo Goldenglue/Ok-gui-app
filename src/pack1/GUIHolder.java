@@ -613,7 +613,6 @@ public class GUIHolder extends JPanel implements ActionListener {
         try (ObjectInputStream serializationInputStream = new ObjectInputStream(new FileInputStream(serializedObjectsFile))) {
             CollectionsForObjects.setAbstractBeeArrayList((ArrayList<AbstractBee>) serializationInputStream.readObject());
             CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
-                System.out.println(abstractBee.getHashCode());
                 CollectionsForObjects.getInstance().getAbstractBeeHashSet().add(abstractBee.getHashCode());
                 CollectionsForObjects.getInstance().getLongLongTreeMap().put(abstractBee.getHashCode(), habitat.simulationTime);
             });
