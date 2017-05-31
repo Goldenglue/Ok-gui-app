@@ -319,7 +319,7 @@ public class GUIHolder extends JPanel implements ActionListener {
 
         JButton readPriorities = new JButton("Set thread priorities");
         readPriorities.addActionListener(actionEvent -> {
-            javaDeserialization();
+            javaDeserialization(selectFile(false));
             /*CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
                 if (abstractBee.getIdentification().equals("BeeWorker")) {
                     abstractBee.baseAI.movementThread.setPriority((int) comboBoxOfBeeWorkerThreadPriorities.getSelectedItem());
@@ -331,7 +331,6 @@ public class GUIHolder extends JPanel implements ActionListener {
         add(readPriorities, new GridBagConstraints(0, 28, 2, 1, 0.5, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
-
     }
 
 
@@ -434,6 +433,18 @@ public class GUIHolder extends JPanel implements ActionListener {
         });
         menu.add(menuItem);
 
+        menuItem = new JMenuItem("Serialize");
+        menuItem.addActionListener(actionEvent -> {
+            javaSerialization(selectFile(false));
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Load objects");
+        menuItem.addActionListener(actionEvent -> {
+            javaDeserialization(selectFile(true));
+        });
+        menu.add(menuItem);
+
         //a submenu
         menu.addSeparator();
         submenu = new JMenu("A submenu");
@@ -460,6 +471,7 @@ public class GUIHolder extends JPanel implements ActionListener {
                 dialog.dispose();
             }
         });
+
         submenu.add(menuItem);
         menu.add(submenu);
         return menuBar;
@@ -513,6 +525,16 @@ public class GUIHolder extends JPanel implements ActionListener {
         toolBar.add(button);
 
         return toolBar;
+    }
+
+    private File selectFile(boolean toOpen) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (toOpen) {
+            fileChooser.showSaveDialog(this);
+        } else {
+            fileChooser.showOpenDialog(this);
+        }
+        return fileChooser.getSelectedFile();
     }
 
     private void getConsole() {
@@ -582,7 +604,7 @@ public class GUIHolder extends JPanel implements ActionListener {
     }
 
     void saveConfiguration() {
-        javaSerialization();
+        javaSerialization(selectFile(false));
         File configurationFile = new File("configuration.txt");
         try (BufferedWriter writeToConfigureFile = new BufferedWriter(new FileWriter(configurationFile))) {
             writeToConfigureFile.write(String.valueOf(habitat.maleBeeUpdatePeriod) + "\n");
@@ -599,8 +621,7 @@ public class GUIHolder extends JPanel implements ActionListener {
     }
 
     //TODO make gui for this lul
-    private void javaSerialization() {
-        File serializedObjectsFile = new File("serialized objects.bin");
+    private void javaSerialization(File serializedObjectsFile) {
         try (ObjectOutputStream serializationOutputStream = new ObjectOutputStream(new FileOutputStream(serializedObjectsFile))) {
             serializationOutputStream.writeObject(CollectionsForObjects.getInstance().getAbstractBeeArrayList());
         } catch (IOException e) {
@@ -608,8 +629,7 @@ public class GUIHolder extends JPanel implements ActionListener {
         }
     }
 
-    private void javaDeserialization() {
-        File serializedObjectsFile = new File("serialized objects.bin");
+    private void javaDeserialization(File serializedObjectsFile) {
         try (ObjectInputStream serializationInputStream = new ObjectInputStream(new FileInputStream(serializedObjectsFile))) {
             CollectionsForObjects.setAbstractBeeArrayList((ArrayList<AbstractBee>) serializationInputStream.readObject());
             CollectionsForObjects.getInstance().getAbstractBeeArrayList().forEach(abstractBee -> {
